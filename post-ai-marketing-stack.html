@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The AI marketing stack I'm actually running in 2026 — by Preeth KP.">
+<title>The AI marketing stack I'm actually running in 2026 — Preeth KP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="bg-grain">
+
+<div class="cursor"></div>
+<div class="cursor-dot"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="dot"></span> Preeth&nbsp;KP</a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="work.html">Work</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Book a call →</a>
+  </div>
+</header>
+
+<article class="post-shell">
+  <a href="blog.html" class="mono" style="color: var(--cream-50); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em;">← Back to blog</a>
+  <div style="height: 32px;"></div>
+
+  <h1>The AI marketing stack I'm <span class="serif">actually</span> running in 2026.</h1>
+  <div class="meta">AI · Growth · 14 min read · May 2026</div>
+
+  <p style="font-size: 22px; color: var(--cream-70); font-family: 'Instrument Serif', serif; font-style: italic; line-height: 1.5;">After eighteen months of testing, here's the prompt library, agent setup and review system I deploy with every client now — and the three things I stopped doing.</p>
+
+  <div style="aspect-ratio: 16/9; background: var(--gx-1); border-radius: var(--radius-lg); margin: 40px 0; position: relative; overflow: hidden;">
+    <div style="position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), transparent 60%);"></div>
+    <span class="serif" style="position: absolute; left: 36px; bottom: 28px; font-size: clamp(36px, 4vw, 60px); color: var(--cream); font-style: italic; line-height: 1;">prompt &middot;<br>agent &middot;<br>review</span>
+  </div>
+
+  <p>Eighteen months ago I stopped writing about AI in marketing and started actually deploying it. The stack I run with clients today looks almost nothing like the one I started with. This essay is what survived contact with reality.</p>
+
+  <h2>The premise</h2>
+  <p>Most "AI marketing" advice fails on one of two ends. On one end, it promises that an LLM will replace your strategy team. It won't, and you don't actually want that. On the other, it tells you AI is a slightly better thesaurus. It's much more than that — but only if you build a system around it.</p>
+  <p>The honest middle is this: a well-designed AI workflow is a 10× multiplier on a workflow you've already designed well, and a 10× amplifier on a workflow you haven't. So the work isn't "use ChatGPT more." It's design the workflow.</p>
+
+  <h2>The three layers I run for every client</h2>
+  <h3>Layer 1 — Prompt libraries</h3>
+  <p>A prompt library is not a folder of prompts. It's a versioned, branded, reviewed set of prompts that produce on-brand output without a senior person rewriting them every time. For each client I build:</p>
+  <ul>
+    <li>A brand voice prompt (the constant — appended to everything)</li>
+    <li>15–25 task prompts (briefs, headlines, ad copy, blog drafts, internal-link suggestions, FAQ generation, transcript cleanup)</li>
+    <li>A small evaluation harness — five sample inputs and a rubric — so we can spot drift when models update</li>
+  </ul>
+
+  <h3>Layer 2 — Agent pipelines</h3>
+  <p>Where prompts are atomic, agents are compositions. The most common pipelines I deploy are:</p>
+  <ul>
+    <li><strong>Cluster → Brief → Draft → QA → Publish</strong> for editorial</li>
+    <li><strong>Concept → Variants → Score → Library</strong> for paid creative</li>
+    <li><strong>Transcript → Summary → Pull-quotes → LinkedIn → Newsletter</strong> for repurposing</li>
+  </ul>
+  <p>I keep these in n8n or Make for ops teams, and Notion + Zapier for marketing teams that don't want to think about queues. Both work. The platform matters less than the pipeline.</p>
+
+  <h3>Layer 3 — Human review loops</h3>
+  <p>Every AI workflow I ship has a human in it. Not as a checkbox, as a gate. The review step is where the system either earns trust or doesn't. Two things make reviews work:</p>
+  <ul>
+    <li><strong>Time-boxed</strong>. If a piece of content takes more than 8 minutes to review, the prompt is wrong.</li>
+    <li><strong>Loop-closed</strong>. Every reviewer note feeds back into the prompt library. Otherwise you're paying for the same correction every week.</li>
+  </ul>
+
+  <blockquote>"The review step is where the system either earns trust or doesn't."</blockquote>
+
+  <h2>Three things I stopped doing</h2>
+
+  <h3>1. Long, monolithic prompts</h3>
+  <p>The "mega prompt" was a phase. It's brittle, it hallucinates, it can't be debugged. I now break every workflow into the smallest reasonable steps, each with one job.</p>
+
+  <h3>2. Output without QA</h3>
+  <p>For about three months I shipped AI content with the kind of cursory check that would never have passed for a human writer. Two clients got bitten by factual errors. I now treat every AI output as a "junior writer with no domain knowledge" — which is the correct mental model.</p>
+
+  <h3>3. Tool-of-the-month</h3>
+  <p>The LinkedIn AI grift cycle is real. New tools every Tuesday. I now stay on a small stack — Claude (daily driver), one image model, n8n for orchestration, Notion for storage — and only adopt new tools when an existing pipeline visibly breaks.</p>
+
+  <h2>What's actually in the stack</h2>
+  <p>For full transparency, here's what's running in production for most of my clients today, as of May 2026:</p>
+  <ul>
+    <li><strong>Reasoning</strong>: Claude Opus 4.6 for strategic work; Claude Sonnet 4.6 for high-volume drafting</li>
+    <li><strong>Search-grounded</strong>: Perplexity API for fact-checked outputs; ChatGPT for SERP-style answers</li>
+    <li><strong>Images</strong>: Midjourney for hero visuals; Adobe Firefly for ad-safe variants</li>
+    <li><strong>Orchestration</strong>: n8n self-hosted; Zapier for low-volume glue</li>
+    <li><strong>Storage &amp; review</strong>: Notion (briefs, prompt library, retros); Linear (engineering tickets); Slack for human-in-the-loop</li>
+    <li><strong>Measurement</strong>: PostHog for behaviour, Looker Studio for marketing dashboards, BigQuery for cohorts</li>
+  </ul>
+
+  <h2>Where this is going</h2>
+  <p>The next twelve months are about agents that act, not just generate. I'm already running three pilots — autonomous bid optimisation, autonomous content QA, autonomous LinkedIn outreach. None of them are ready for prime-time. But the direction is clear: less prompting, more guardrails. Less generation, more orchestration.</p>
+  <p>If you'd like to see how this would map to your team's specific stack, the easiest way is a 30-minute discovery call. <a href="contact.html" style="color: var(--c-yellow); border-bottom: 1px solid var(--c-yellow);">Drop me a brief here</a> and we'll figure out where the leverage is.</p>
+
+  <div style="margin-top: 64px; padding: 32px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--bg-card);">
+    <span class="eyebrow">The author</span>
+    <p style="margin-top: 16px; font-size: 16px;">Preeth KP is an independent digital growth and AI marketing consultant, and the founder of <a href="https://techplugged.com" target="_blank" rel="noopener" style="color: var(--c-yellow); border-bottom: 1px solid var(--c-yellow);">TechPlugged</a>. He works with founder-led brands across SaaS, DTC and publishing, helping them turn attention into revenue.</p>
+  </div>
+</article>
+
+<!-- FOOTER -->
+<footer class="footer container">
+  <div class="footer-grid">
+    <div>
+      <div style="font-size: clamp(40px, 5vw, 72px); letter-spacing: -0.04em; line-height: 1;">
+        Let's <span class="serif">build</span> something<br>worth talking about.
+      </div>
+      <div style="margin-top: 28px;">
+        <a href="mailto:hello@techplugged.com" class="btn btn--solid">hello@techplugged.com</a>
+      </div>
+      <div class="socials">
+        <a class="social-pill" href="https://linkedin.com/in/preethkp" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.5h4.55V23H.22V8.5zM8.34 8.5h4.36v1.98h.06c.61-1.16 2.1-2.38 4.32-2.38 4.62 0 5.48 3.04 5.48 7v7.9h-4.55v-7c0-1.67-.03-3.82-2.33-3.82-2.33 0-2.69 1.82-2.69 3.7v7.12H8.34V8.5z"/></svg>
+        </a>
+        <a class="social-pill" href="https://instagram.com/preeth.insta" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <h4>Sitemap</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html#ai">AI Growth Marketing</a></li>
+        <li><a href="services.html#seo">SEO &amp; Content</a></li>
+        <li><a href="services.html#paid">Paid Media</a></li>
+        <li><a href="services.html#brand">Brand &amp; Social</a></li>
+        <li><a href="services.html#funnels">Growth Funnels</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="https://techplugged.com" target="_blank" rel="noopener">TechPlugged.com</a></li>
+        <li><a href="https://linkedin.com/in/preethkp" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://instagram.com/preeth.insta" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="mailto:hello@techplugged.com">Email</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 Preeth KP. Independent practice.</span>
+    <span>Crafted with caffeine in Bengaluru — running on Cloudflare &amp; opinions.</span>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>
