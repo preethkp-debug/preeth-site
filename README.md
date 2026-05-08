@@ -73,3 +73,6 @@ preeth-site/
 - Instagram: <https://instagram.com/preeth.insta>
 - TechPlugged: <https://techplugged.com>
 - Email: hello@techplugged.com
+
+
+<!-- deployed via vercel -->
